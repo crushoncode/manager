@@ -1,6 +1,10 @@
-import { EMAIL_CHANGED, PASSWORD_CHANGED } from '../actions/types';
+import {
+  EMAIL_CHANGED,
+  PASSWORD_CHANGED,
+  LOGIN_USER_SUCCESS
+} from '../actions/types';
 
-const INITIAL_STATE = { email: '', password: '' };
+const INITIAL_STATE = { email: '', password: '', user: null };
 
 export default (state = INITIAL_STATE, action) => {
   console.log(action);
@@ -11,6 +15,8 @@ export default (state = INITIAL_STATE, action) => {
       // make new objects and take all of the properties of my existing state objects and throw them into the object
       // define the property of email and give it the value of action.payload
       return { ...state, password: action.payload };
+    case LOGIN_USER_SUCCESS:
+      return { ...state, user: action.payload };
     default:
       return state;
   }
