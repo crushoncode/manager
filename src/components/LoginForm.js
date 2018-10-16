@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Card, CardSection, Field, Button } from './common';
+import { Card, CardSection, Field, Button, Spinner } from './common';
 
 class LoginForm extends Component {
   onEmailChange(text) {
@@ -10,11 +10,6 @@ class LoginForm extends Component {
   }
   onPasswordChange(text) {
     this.props.passwordChanged(text);
-  }
-
-  onButtonPress() {
-    const { email, password } = this.props;
-    this.props.loginUser({ email, password });
   }
 
   renderError() {
@@ -26,6 +21,23 @@ class LoginForm extends Component {
       );
     }
   }
+
+  onButtonPress() {
+    const { email, password } = this.props;
+    this.props.loginUser({ email, password });
+  }
+
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+    return <Button onPress={() => this.onButtonPress()}>Login</Button>;
+  }
+
+  componentWillReceiveProps(props) {
+    console.log(props);
+  }
+
   render() {
     return (
       <Card>
@@ -50,9 +62,7 @@ class LoginForm extends Component {
 
         {this.renderError()}
 
-        <CardSection>
-          <Button onPress={() => this.onButtonPress()}>Login</Button>
-        </CardSection>
+        <CardSection>{this.renderButton()}</CardSection>
       </Card>
     );
   }
@@ -66,13 +76,19 @@ const styles = {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    email: state.auth.email,
-    password: state.auth.password,
-    error: state.auth.error
-  };
+const mapStateToProps = ({ auth }) => {
+  const { email, password, error, loading } = auth;
+  return { email, password, error, loading };
 };
+
+// const mapStateToProps = (state) => {
+//   return {
+//     loading: state.auth.loading,
+//     email: state.auth.email,
+//     password: state.auth.password,
+//     error: state.auth.password
+//   };
+// };
 
 export default connect(
   mapStateToProps,
