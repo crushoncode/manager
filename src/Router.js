@@ -17,6 +17,10 @@ const RouterComponent = () => {
         </Scene>
         <Scene key="main">
           <Scene
+            rightTitle="Add"
+            onRight={() => {
+              console.log('right!!!');
+            }}
             key="employeeList"
             component={EmployeeList}
             title="Employees"
