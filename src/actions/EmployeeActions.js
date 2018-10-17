@@ -32,8 +32,10 @@ export const employeeCreate = ({ name, phone, shift }) => {
 // asyncronous actions
 export const employeesFetch = () => {
   const { currentUser } = firebase.auth();
+
   return (dispatch) => {
-    firebase.database
+    firebase
+      .database()
       .ref(`/users/${currentUser.uid}/employees`)
       // snapshot: object that describes what data is in there
       .on('value', (snapshot) => {
