@@ -23,6 +23,13 @@ export const employeeCreate = ({ name, phone, shift }) => {
       .push({ name, phone, shift })
       // Actions.pop(): it returns to the previous scene(=navigate to employeeList) and prevents double scene stacking behavior.
       .then(() => {
+        // let user = {
+        //   name: name,
+        //   phone: phone,
+        //   shift: shift
+        // };
+
+        // dispatch({ type: EMPLOYEE_CREATE, payload: user });
         dispatch({ type: EMPLOYEE_CREATE });
         Actions.pop();
       });

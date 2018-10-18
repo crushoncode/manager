@@ -18,7 +18,7 @@ const styles = {
     elvation: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 50
+    marginTop: 5
   }
 };
 
