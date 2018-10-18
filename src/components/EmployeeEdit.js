@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Communications from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
-import { employeeUpdate, employeeSave } from '../actions';
+import { employeeUpdate, employeeSave, employeeDelete } from '../actions';
 import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
@@ -30,7 +30,11 @@ class EmployeeEdit extends Component {
     Communications.text(phone, `Your upcoming shift is on ${shift}`);
   }
 
-  onAccept() {}
+  onAccept() {
+    const { uid } = this.props.employee;
+    // pass it as an { object }
+    this.props.employeeDelete({ uid });
+  }
 
   onDecline() {
     this.setState({ showModal: false });
@@ -77,6 +81,7 @@ export default connect(
   mapStateToProps,
   {
     employeeUpdate,
-    employeeSave
+    employeeSave,
+    employeeDelete
   }
 )(EmployeeEdit);
