@@ -53,3 +53,16 @@ export const employeesFetch = () => {
       });
   };
 };
+
+export const employeeSave = ({ name, phone, shift, uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+    firebase
+      .database()
+      .ref(`/users/${currentUser.uid}/employees/${uid}`)
+      // update the info
+      .set({ name, phone, shift })
+      .then(() => console.log('saved!'));
+  };
+};
