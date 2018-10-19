@@ -3,9 +3,6 @@ import { EMPLOYEES_FETCH_SUCCESS } from '../actions/types';
 import _ from 'lodash';
 
 const INITIAL_STATE = {};
-// const INITIAL_STATE = {
-//   employees: []
-// };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
