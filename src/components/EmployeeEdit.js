@@ -8,7 +8,7 @@ import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
   state = { showModal: false };
-  componentWillMount() {
+  componentDidMount() {
     _.each(this.props.employee, (value, prop) => {
       this.props.employeeUpdate({ prop, value });
     });
@@ -54,7 +54,7 @@ class EmployeeEdit extends Component {
 
         <CardSection>
           <Button
-            onPress={() => this.setState({ showModal: !this.state.showMOdal })}
+            onPress={() => this.setState({ showModal: !this.state.showModal })}
           >
             Good bye, employee
           </Button>
